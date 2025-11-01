@@ -1,0 +1,14 @@
+# Ignore environment files
+.env
+
+
+# Ignore vendor if using composer
+/vendor/
+
+# Ignore IDE and system files
+*.log
+*.DS_Store
+*.idea/
+*.vscode/
+*.bak
+*.swp
