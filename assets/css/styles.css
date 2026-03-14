@@ -1,0 +1,227 @@
+/* ==========================
+   Global Reset & Base Styles
+   ========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, #f0f4ff 0%, #e0f2fe 50%, #fdf4ff 100%) fixed;
+    color: #1e293b;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1; /* Pushes footer down if main content is short */
+}
+
+/* ==========================
+   Page Wrappers & Containers
+   ========================= */
+.home-page, .editor-page, .profile-page-wrapper, 
+.settings-page-wrapper, .blog-view-page, .auth-page {
+    padding: 50px 0;
+    min-height: calc(100vh - 80px);
+}
+
+/* Grouped shared container styles */
+.form-container, .editor-container, .profile-page, 
+.settings-page, .blog-view-container {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(99, 102, 241, 0.15);
+    border-top: 6px solid #6366f1;
+    margin: 30px auto 0;
+    max-width: 1000px;
+    transition: all 0.3s ease;
+}
+
+.form-container:hover, .editor-container:hover, .profile-page:hover, 
+.settings-page:hover, .blog-view-container:hover {
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2);
+}
+
+.form-container { max-width: 450px; }
+.settings-page { max-width: 900px; }
+
+/* ==========================
+   Typography
+   ========================== */
+.page-title, .profile-title, .editor-title, 
+.settings-page h2, .blog-title, .auth-page h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    margin-bottom: 35px;
+    text-align: center;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-title {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 6px; height: 30px;
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-radius: 3px;
+}
+
+/* ==========================
+   Forms, Inputs & Buttons
+   ========================== */
+input[type="text"], input[type="email"], input[type="password"],
+textarea, select, .form-input, .form-textarea, .search-input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 15px;
+    color: #0f172a;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    margin-bottom: 15px; /* Unified spacing */
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    background: #fff;
+}
+
+textarea, .form-textarea {
+    min-height: 250px;
+    resize: vertical;
+}
+
+/* Unified Button Logic */
+button, .btn, .btn-primary, .create-btn, .search-btn, .auth-page button {
+    padding: 14px 30px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+button:hover, .btn-primary:hover, .create-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+.edit-btn, .delete-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.edit-btn { background: #f59e0b; color: #fff; }
+.delete-btn { background: #dc2626; color: #fff; }
+
+/* ==========================
+   Blog Components
+   ========================== */
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.blog-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.1);
+    border-top: 5px solid #3b82f6;
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover { transform: translateY(-8px); }
+
+.blog-card-title, .blog-card h2 {
+    font-size: 1.5em;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ==========================
+   Special Sections (Settings/Auth/Scroll)
+   ========================== */
+.settings-section {
+    margin-bottom: 35px;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, #fef3c7, #f0f9ff);
+    border-radius: 15px;
+    border-left: 6px solid #3b82f6;
+}
+
+.error { background: #fef2f2; color: #dc2626; border-left: 4px solid #dc2626; padding: 12px; border-radius: 8px; }
+.success { background: #f0fdf4; color: #16a34a; border-left: 4px solid #16a34a; padding: 12px; border-radius: 8px; }
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-radius: 6px;
+}
+
+/* ==========================
+   Responsive Design
+   ========================== */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%; top: 62px;
+        flex-direction: column;
+        background: linear-gradient(180deg, #3b82f6, #6366f1, #8b5cf6);
+        width: 100%; height: calc(100vh - 62px);
+        transition: 0.3s;
+    }
+    .nav-menu.active { left: 0; }
+    
+    .form-container, .editor-container, .profile-page, .settings-page, .blog-view-container {
+        padding: 35px 25px;
+    }
+
+    .search-form { flex-direction: column; }
+    button, .search-btn { width: 100%; }
+    .blog-list { grid-template-columns: 1fr; }
+}
