@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+include "config/db.php";
 
 // Check if user is logged in
 function isLoggedIn() {
@@ -10,7 +10,7 @@ function isLoggedIn() {
 // Redirect if not logged in
 function requireLogin() {
     if (!isLoggedIn()) {
-        header("Location: login.php");
+        header("Location: auth/login.php");
         exit;
     }
 }

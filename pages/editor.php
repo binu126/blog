@@ -1,12 +1,11 @@
 <?php
-include "functions.php";
+include "includes/functions.php";
 requireLogin();
 
 $post = [
     'id' => '',
     'title' => '',
     'content' => '',
-    'image' => ''
 ];
 
 $editing = false;
@@ -34,7 +33,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<?php include "header.php"; ?>
+<?php include "includes/header.php"; ?>
 
 <main class="editor-page">
     <section class="container editor-container">
@@ -62,8 +61,6 @@ if (isset($_GET['id'])) {
         </form>
     </section>
 </main>
-
-<script src="assets/js/main.js"></script>
 
 </body>
 </html>

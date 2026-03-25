@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include "config/db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $username, $email, $password);
 
     if ($stmt->execute()) {
-        header("Location: login.php?registered=1");
+        header("Location:auth/ login.php?registered=1");
         exit;
     } else {
         $error = "Error: " . $conn->error;
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
-            <p>Already have an account? <a href="login.php">Login</a></p>
+            <p>Already have an account? <a href="auth/login.php">Login</a></p>
         </form>
     </div>
 </body>
