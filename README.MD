@@ -73,5 +73,5 @@ Follow these steps to set up the project locally:
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/binu126/wordweave-blog.git
-cd wordweave-blog
+git clone https://github.com/binu126/blog.git
+cd blog
