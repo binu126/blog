@@ -1,5 +1,5 @@
 <?php
-include "functions.php";
+include "../includes/functions.php";
 requireLogin();
 
 $user_id = $_SESSION['user_id'];
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare("UPDATE user SET username=?, email=? WHERE id=?");
         $stmt->bind_param("ssi", $username, $email, $user_id);
         $stmt->execute();
-        echo "<script>alert('Profile updated successfully!');</script>";
+        $success = "Profile updated successfully!";
     }
 
     // Change Password
@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $update = $conn->prepare("UPDATE user SET password=? WHERE id=?");
             $update->bind_param("si", $hash, $user_id);
             $update->execute();
-            echo "<script>alert('Password changed successfully!');</script>";
+            $success = "Password changed successfully!";
         } else {
-            echo "<script>alert('Current password is incorrect!');</script>";
+            $error = "Current password is incorrect!";
         }
     }
 }
@@ -44,34 +44,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Settings - MyBlog</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Settings - WordWeave</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/styles.css">
 </head>
-<body class="<?= isset($_SESSION['theme']) && $_SESSION['theme'] === 'dark' ? 'dark-theme' : '' ?>">
-<?php include "header.php"; ?>
+<body>
+<?php include "../includes/header.php"; ?>
 
-<div class="container settings-page">
-    <h2>Settings</h2>
+<main class="container settings-page">
+    <h2 class="settings-title">Account Settings</h2>
+
+    <?php if (isset($success)): ?>
+        <p class="success" style="margin-bottom: 20px;"><?= $success; ?></p>
+    <?php endif; ?>
+
+    <?php if (isset($error)): ?>
+        <p class="error" style="margin-bottom: 20px;"><?= $error; ?></p>
+    <?php endif; ?>
 
     <div class="settings-section">
-        <h3>Edit Profile</h3>
+        <h3 style="margin-bottom: 20px; color: var(--primary);">Edit Profile</h3>
         <form method="post">
-            <input type="text" name="username" value="<?= e($user['username']); ?>" required>
-            <input type="email" name="email" value="<?= e($user['email']); ?>" required>
-            <button type="submit" name="update_profile">Update Profile</button>
+            <div class="form-group">
+                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600;">Username</label>
+                <input type="text" name="username" value="<?= e($user['username']); ?>" required>
+            </div>
+            <div class="form-group">
+                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600;">Email Address</label>
+                <input type="email" name="email" value="<?= e($user['email']); ?>" required>
+            </div>
+            <button type="submit" name="update_profile" class="btn-primary" style="width: 100%;">Update Profile</button>
         </form>
     </div>
 
     <div class="settings-section">
-        <h3>Change Password</h3>
+        <h3 style="margin-bottom: 20px; color: var(--primary);">Change Password</h3>
         <form method="post">
-            <input type="password" name="current_password" placeholder="Current Password" required>
-            <input type="password" name="new_password" placeholder="New Password" required>
-            <button type="submit" name="change_password">Change Password</button>
+            <div class="form-group">
+                <input type="password" name="current_password" placeholder="Current Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="new_password" placeholder="New Password" required>
+            </div>
+            <button type="submit" name="change_password" class="btn-primary" style="width: 100%;">Change Password</button>
         </form>
     </div>
-</div>
+</main>
 
+<footer>
+    <p>&copy; <?php echo date('Y'); ?> WordWeave. All rights reserved.</p>
+</footer>
 </body>
 </html>

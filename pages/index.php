@@ -1,5 +1,5 @@
 <?php
-include "functions.php";
+include "../includes/functions.php";
 
 // Search blogs
 $search = isset($_GET['search']) ? "%" . $_GET['search'] . "%" : "%";
@@ -19,11 +19,11 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - MyBlog</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Home - WordWeave</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/styles.css">
 </head>
 <body>
-<?php include "header.php"; ?>
+<?php include "../includes/header.php"; ?>
 
 <main class="home-page">
     <section class="container blog-home-container">
@@ -41,12 +41,12 @@ $result = $stmt->get_result();
 
         <!-- 📝 Blog List -->
         <div class="blog-list">
-            <?php if ($result->num_rows > 0): ?>
+            <?php if ($result && $result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <article class="blog-card">
                         <div class="blog-card-content">
                             <h2 class="blog-card-title">
-                                <a href="view.php?id=<?php echo $row['id']; ?>">
+                                <a href="<?php echo BASE_URL; ?>posts/view.php?id=<?php echo $row['id']; ?>">
                                     <?php echo e($row['title']); ?>
                                 </a>
                             </h2>
@@ -55,16 +55,22 @@ $result = $stmt->get_result();
                                 on <span class="date"><?php echo date('F j, Y', strtotime($row['created_at'])); ?></span>
                             </p>
                             <p class="blog-card-excerpt">
-                                <?php echo substr(e($row['content']), 0, 150); ?>...
+                                <?php echo substr(strip_tags($row['content']), 0, 150); ?>...
                             </p>
                         </div>
                     </article>
                 <?php endwhile; ?>
             <?php else: ?>
-                <p class="no-blogs-msg">No blogs found.</p>
+                <div class="no-blogs-container">
+                    <p class="no-blogs-msg">No blogs found. Be the first to write one!</p>
+                </div>
             <?php endif; ?>
         </div>
     </section>
 </main>
-            </body>
+
+<footer>
+    <p>&copy; <?php echo date('Y'); ?> WordWeave. All rights reserved.</p>
+</footer>
+</body>
 </html>

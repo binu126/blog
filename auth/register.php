@@ -1,5 +1,5 @@
 <?php
-include "config/db.php";
+include "../config/db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $username, $email, $password);
 
     if ($stmt->execute()) {
-        header("Location:auth/ login.php?registered=1");
+        header("Location: " . BASE_URL . "auth/login.php?registered=1");
         exit;
     } else {
         $error = "Error: " . $conn->error;
@@ -22,9 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Register</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Register - WordWeave</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/styles.css">
 </head>
 <body class="auth-page">
     <div class="form-container">
@@ -35,7 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
-            <p>Already have an account? <a href="auth/login.php">Login</a></p>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #64748b;">
+                Already have an account? <a href="<?php echo BASE_URL; ?>auth/login.php" style="color: var(--primary); font-weight: 600; text-decoration: none;">Login</a>
+            </p>
         </form>
     </div>
 </body>

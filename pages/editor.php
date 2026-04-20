@@ -1,5 +1,5 @@
 <?php
-include "includes/functions.php";
+include "../includes/functions.php";
 requireLogin();
 
 $post = [
@@ -29,38 +29,41 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $editing ? "Edit Blog" : "New Blog" ?> - MyBlog</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title><?= $editing ? "Edit Blog" : "New Blog" ?> - WordWeave</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/styles.css">
 </head>
 <body>
-<?php include "includes/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 
 <main class="editor-page">
     <section class="container editor-container">
         <h2 class="editor-title"><?= $editing ? "Edit Blog" : "Create New Blog" ?></h2>
 
-        <form action="save_post.php" method="post" enctype="multipart/form-data" class="editor-form">
+        <form action="<?php echo BASE_URL; ?>posts/save_post.php" method="post" enctype="multipart/form-data" class="editor-form">
             <input type="hidden" name="id" value="<?= e($post['id']); ?>">
 
             <!-- Blog Title -->
             <div class="form-group">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" id="title" name="title" class="form-input" required value="<?= e($post['title']); ?>">
+                <label for="title" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600;">Title</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="Enter a catchy title..." required value="<?= e($post['title']); ?>">
             </div>
 
             <!-- Blog Content -->
-            <div class="form-group">
-                <label for="content" class="form-label">Content</label>
-                <textarea id="content" name="content" class="form-textarea" rows="10" required><?= e($post['content']); ?></textarea>
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="content" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600;">Content</label>
+                <textarea id="content" name="content" class="form-textarea" placeholder="Write your thoughts here..." rows="12" required><?= e($post['content']); ?></textarea>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 20px;">
                 <?= $editing ? "Update Blog" : "Publish Blog" ?>
             </button>
         </form>
     </section>
 </main>
 
+<footer>
+    <p>&copy; <?php echo date('Y'); ?> WordWeave. All rights reserved.</p>
+</footer>
 </body>
 </html>
